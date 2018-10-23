@@ -70,6 +70,8 @@
               }
           });
           
+          var rapidExtensionHandled = true;
+          
           // 윈도우 사이즈가 줄어들 시 content 클래스의 사이즈도 변경하며 최종적으로 내부 요소들도 그에 맞게 사이즈가 변경됩니다
           // 또한 chart를 다시 그려주며 사이즈를 변경해줍니다.
           $(window).resize(() => {
@@ -77,6 +79,13 @@
               if (wndWidth <= 1100) {
                   $('.content').width(wndWidth);
                   draw();
+                  rapidExtensionHandled = false;
+              } else {
+                  if (rapidExtensionHandled === false) {
+                      $('.content').width(1100);
+                      draw();
+                      rapidExtensionHandled = true;
+                  }
               }
           })
       });        
